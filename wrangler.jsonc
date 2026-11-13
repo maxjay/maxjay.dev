@@ -1,0 +1,9 @@
+// Cloudflare serves the built pages in dist/ as static files. There is no Worker code.
+{
+  "name": "maxjay-dev",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

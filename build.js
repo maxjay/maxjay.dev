@@ -58,8 +58,9 @@ const plain = (text) => text.replace(/\*/g, '').replace(/\{(\w+)\}/g, (_, w) => 
 const label = (href) => href.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 // The stamp is the commit this build came from.
-let commit = '';
-try { commit = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch {}
+// Cloudflare's build passes the commit in WORKERS_CI_COMMIT_SHA. Locally, ask git.
+let commit = (process.env.WORKERS_CI_COMMIT_SHA ?? '').slice(0, 7);
+if (!commit) try { commit = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch {}
 const stamp = `${entries.length} entries${commit ? `  ·  <a href="${site.repo}/commit/${commit}">${commit}</a>` : ''}`;
 
 const KEYS = {

@@ -1,2 +1,4 @@
 dist/
 .claude/
+.wrangler/
+node_modules/
