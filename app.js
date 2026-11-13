@@ -62,7 +62,12 @@ if (q) {
 }
 
 addEventListener('keydown', (ev) => {
-  if (!q) { if (ev.key === 'Escape') location.href = '/'; return; }
+  if (!q) {
+    // Firefox treats Esc as "stop loading", which cancels a navigation started in the same
+    // keypress. preventDefault() turns that off so going back to the index goes through.
+    if (ev.key === 'Escape') { ev.preventDefault(); location.href = '/'; }
+    return;
+  }
   if (ev.key === 'Escape') { q.value = ''; filter(); }
   else if (ev.key === 'ArrowDown') { select(sel + 1); ev.preventDefault(); }
   else if (ev.key === 'ArrowUp') { select(sel - 1); ev.preventDefault(); }
