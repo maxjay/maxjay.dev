@@ -25,8 +25,8 @@ export const entries = [
     links: ['https://github.com/maxjay/jvmd'],
   },
   {
-    name: 'dova', planned: true, lang: 'typescript', state: 'active', since: 'Aug 2026',
-    built: 'TypeScript, Node, zod',
+    name: 'dova', planned: true, lang: 'rust', state: 'active', since: 'Aug 2026',
+    built: 'Rust',
     works: 'Azure Boards, Repos and Pipelines',
     line: 'Azure DevOps, starting from your git repo.',
     text: [
