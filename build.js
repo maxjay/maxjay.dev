@@ -141,6 +141,7 @@ function sheet(e) {
   if (e.state) rows.push(['State', tint(e.state, stateHue[e.state]) + (e.lang ? `, ${tint(e.lang, langHue[e.lang])}` : '')]);
   fact('Since', e.since);
   fact('Location', e.where);
+  if (e.contact) rows.push(['Contact', `<a href="mailto:${e.contact}">${esc(e.contact)}</a>`]);
   const go = (e.links ?? []).map((href) => `<a href="${href}">${esc(label(href))}</a>`);
   if (e.planned) go.unshift(`<span>${e.name}.${site.name} (planned)</span>`);
   if (go.length) rows.push(['Go to', links(go)]);

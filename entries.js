@@ -83,7 +83,7 @@ export const entries = [
     ],
   },
   {
-    name: 'max', does: 'A bit of everything', where: 'London',
+    name: 'max', does: 'A bit of everything', where: 'London', contact: site.email,
     line: 'I make {shit} work.',
     links: ['https://github.com/maxjay'],
   },
