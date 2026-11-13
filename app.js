@@ -42,6 +42,11 @@ function filter() {
   select(0);
 }
 
+// The light / dark switch is CSS. This only remembers the pick for the next page.
+document.querySelector('.theme').addEventListener('change', (ev) => {
+  try { localStorage.theme = ev.target.value; } catch {}
+});
+
 addEventListener('mouseover', (ev) => scramble(ev.target.closest?.('.cz')));
 document.querySelectorAll('.cz').forEach(scramble); // the build's symbols are fixed, so reshuffle on load
 

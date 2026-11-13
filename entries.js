@@ -7,6 +7,7 @@ export const site = {
   name: 'maxjay.dev',
   url: 'https://maxjay.dev',
   repo: 'https://github.com/maxjay/maxjay.dev',
+  email: 'me@maxjay.dev',
 };
 
 export const entries = [

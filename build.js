@@ -98,7 +98,12 @@ function page({ path, title, description, h, here = '', kind, body }) {
 <main>
 ${body}
 </main>
-<footer class="strip"><div class="keys">${keys(kind)}</div></footer>
+<footer class="strip">
+  <div class="keys">${keys(kind)}</div>
+  <a class="contact" href="mailto:${site.email}">${site.email}</a>
+  <fieldset class="theme"><label><input type="radio" name="theme" value="light">light</label> / <label><input type="radio" name="theme" value="dark">dark</label></fieldset>
+  <script>try { document.querySelector('.theme [value="' + localStorage.theme + '"]').checked = true; } catch {}</script>
+</footer>
 </body>
 </html>
 `;

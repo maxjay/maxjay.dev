@@ -8,9 +8,11 @@
   --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
+/* Dark: when the system asks for it, or when the dark radio in the footer is checked. No script involved. */
 @media (prefers-color-scheme: dark) {
-  :root { --paper: #0e0f0d; --ink: #ecebe4; --dim: #8b897e; --line: #2a2b27; --cl: 0.80; --cc: 0.15; }
+  :root:not(:has(.theme [value="light"]:checked)) { --paper: #0e0f0d; --ink: #ecebe4; --dim: #8b897e; --line: #2a2b27; --cl: 0.80; --cc: 0.15; }
 }
+:root:has(.theme [value="dark"]:checked) { --paper: #0e0f0d; --ink: #ecebe4; --dim: #8b897e; --line: #2a2b27; --cl: 0.80; --cc: 0.15; }
 
 /* An element with class "hue" sets --h. --c is that hue at the theme's one lightness and chroma. */
 .hue { --c: oklch(var(--cl) var(--cc) var(--h)); }
@@ -49,7 +51,18 @@ svg.glyph { display: block; fill: currentColor; }
 .strip .here svg { width: 14px; height: 14px; }
 .strip .here span { color: var(--dim); }
 #stamp { white-space: pre; }
-#stamp a:hover { color: var(--ink); }
+#stamp a:hover, .contact:hover { color: var(--ink); }
+.contact { margin-left: auto; }
+/* light / dark: 2 radios drawn as words. The one in force is in ink. */
+.theme { border: 0; }
+.theme label { cursor: pointer; }
+.theme input { position: absolute; opacity: 0; pointer-events: none; }
+.theme label:has(:checked), .theme:not(:has(:checked)) label:first-of-type { color: var(--ink); }
+.theme label:has(:focus-visible) { outline: 1px solid var(--dim); outline-offset: 3px; }
+@media (prefers-color-scheme: dark) {
+  .theme:not(:has(:checked)) label:first-of-type { color: inherit; }
+  .theme:not(:has(:checked)) label:last-of-type { color: var(--ink); }
+}
 .keys { display: flex; gap: 20px; flex-wrap: wrap; }
 .keys kbd {
   font: inherit; color: var(--ink);
@@ -153,6 +166,7 @@ dl.spec dd a:hover { background: var(--c); color: var(--on); }
   .strip { min-height: 0; padding: 16px 0; }
   .strip .here { white-space: nowrap; }
   #stamp, .keys, #big { display: none; }
+  .contact { margin-left: 0; }
 
   /* index: mark and name on one line, description under the name, nothing else */
   .ask { padding: 20px 0 10px; gap: 10px; }
