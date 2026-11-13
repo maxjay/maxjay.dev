@@ -1,0 +1,178 @@
+:root {
+  --paper: #f2f0e9;
+  --ink: #14140f;
+  --dim: #78766b;
+  --line: #d5d2c6;
+  --on: #14140f;
+  --cl: 0.70; --cc: 0.17;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #0e0f0d; --ink: #ecebe4; --dim: #8b897e; --line: #2a2b27; --cl: 0.80; --cc: 0.15; }
+}
+
+/* An element with class "hue" sets --h. --c is that hue at the theme's one lightness and chroma. */
+.hue { --c: oklch(var(--cl) var(--cc) var(--h)); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+html::before { content: ""; position: fixed; inset: 0 0 auto 0; height: 6px; background: var(--c); z-index: 1; }
+body {
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+svg.glyph { display: block; fill: currentColor; }
+[hidden] { display: none !important; }
+
+/* a censored word */
+.cz { font-family: var(--mono); font-weight: 500; color: var(--c); white-space: nowrap; cursor: default; }
+.lede .cz { font-size: .84em; letter-spacing: -0.02em; }
+
+/* strip: top and bottom */
+.strip {
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  min-height: 60px; padding: 20px 0;
+  color: var(--dim);
+  font-size: 13px;
+}
+.strip .here { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.strip .here svg { width: 14px; height: 14px; }
+.strip .here span { color: var(--dim); }
+#stamp { white-space: pre; }
+#stamp a:hover { color: var(--ink); }
+.keys { display: flex; gap: 20px; flex-wrap: wrap; }
+.keys kbd {
+  font: inherit; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; margin-right: 6px;
+}
+
+/* index */
+.ask {
+  display: flex; align-items: baseline; gap: 14px;
+  border-bottom: 1px solid var(--ink);
+  padding: 56px 0 14px;
+}
+.ask label { color: var(--c); font-family: var(--display); font-size: 40px; font-weight: 500; line-height: 1; }
+.ask input {
+  flex: 1; min-width: 0;
+  font-family: var(--display); font-stretch: 84%; font-weight: 560;
+  font-size: 40px; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--ink); background: none; border: 0; outline: 0;
+  caret-color: var(--c);
+}
+.ask input::placeholder { color: var(--line); }
+
+ol.rows { list-style: none; }
+ol.rows a {
+  display: grid;
+  grid-template-columns: 44px 38px clamp(180px, 22vw, 290px) 1fr 96px 92px;
+  align-items: center; column-gap: 16px;
+  padding: 18px 12px 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+ol.rows .n { color: var(--dim); padding-left: 12px; font-size: 13px; }
+ol.rows a > svg { width: 26px; height: 26px; fill: var(--c); }
+ol.rows .name {
+  font-family: var(--display); font-stretch: 84%; font-weight: 620;
+  font-size: clamp(32px, 3.8vw, 46px); line-height: 1; letter-spacing: -0.025em;
+}
+ol.rows .line { color: var(--dim); }
+ol.rows .lang, ol.rows .state { color: var(--dim); font-size: 13px; }
+ol.rows .state { text-align: right; white-space: nowrap; }
+.tint { color: var(--c); }
+
+/* the selected row */
+ol.rows a.on { background: var(--c); color: var(--on); border-bottom-color: var(--c); }
+ol.rows a.on :is(.n, .line, .lang, .state) { color: var(--on); opacity: .8; }
+ol.rows a.on svg { fill: var(--on); }
+ol.rows a.on :is(.tint, .cz) { color: inherit; }
+
+.none { padding: 22px 12px; color: var(--dim); }
+
+/* The selected entry's mark, drawn large under the list. It takes whatever height the 7 rows leave. */
+#big { width: clamp(0px, calc(100vh - 900px), 300px); aspect-ratio: 1; margin: 36px 0 0 auto; }
+#big svg { width: 100%; height: 100%; fill: var(--c); }
+
+/* sheet */
+.back { display: inline-block; margin-top: 40px; color: var(--dim); }
+.back:hover { color: var(--ink); }
+.title { display: flex; align-items: flex-end; gap: 28px; padding: 28px 0 18px; }
+.title svg { width: clamp(72px, 10vw, 116px); height: clamp(72px, 10vw, 116px); flex: none; fill: var(--c); }
+.title h1 {
+  font-family: var(--display); font-stretch: 78%; font-weight: 680;
+  font-size: clamp(64px, 12vw, 148px); line-height: .82; letter-spacing: -0.04em;
+}
+.lede {
+  font-family: var(--display); font-stretch: 92%; font-weight: 440;
+  font-size: clamp(24px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.015em;
+  padding: 6px 0 22px; max-width: 28ch;
+}
+/* the notes: plain paragraphs, no labels */
+.prose { max-width: 37em; padding-bottom: 44px; }
+.prose p {
+  font-family: var(--display); font-stretch: 95%; font-weight: 420;
+  font-size: clamp(19px, 1.85vw, 23px); line-height: 1.42; letter-spacing: -0.004em;
+}
+.prose p + p { margin-top: .75em; }
+.prose em { font-style: normal; color: var(--c); }
+
+/* the facts */
+dl.spec { border-top: 1px solid var(--ink); }
+dl.spec > div {
+  display: grid; grid-template-columns: 44px 150px 1fr; column-gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid var(--line);
+}
+dl.spec .n { color: var(--dim); padding-left: 12px; font-size: 13px; }
+dl.spec dt { color: var(--dim); }
+dl.spec dd { max-width: 60ch; font-size: 16px; line-height: 1.6; }
+dl.spec dd ul { list-style: none; }
+dl.spec dd li { padding: 2px 0; }
+dl.spec dd li span { color: var(--dim); }
+dl.spec dd a { border-bottom: 2px solid var(--c); }
+dl.spec dd a:hover { background: var(--c); color: var(--on); }
+
+/* narrow window or tablet: drop the language column so the description keeps its width */
+@media (max-width: 1000px) {
+  ol.rows a { grid-template-columns: 36px 34px clamp(170px, 23vw, 230px) 1fr 84px; }
+  ol.rows .lang { display: none; }
+}
+
+/* phone */
+@media (max-width: 760px) {
+  body { padding: 0 16px; min-height: 100dvh; }
+  .strip { min-height: 0; padding: 16px 0; }
+  .strip .here { white-space: nowrap; }
+  #stamp, .keys, #big { display: none; }
+
+  /* index: mark and name on one line, description under the name, nothing else */
+  .ask { padding: 20px 0 10px; gap: 10px; }
+  .ask label, .ask input { font-size: 28px; }
+  ol.rows a { grid-template-columns: 22px 1fr; column-gap: 12px; row-gap: 5px; padding: 13px 10px; }
+  ol.rows .n, ol.rows .lang, ol.rows .state { display: none; }
+  ol.rows a > svg { width: 22px; height: 22px; }
+  ol.rows .name { font-size: 30px; }
+  ol.rows .line { grid-column: 2; font-size: 13px; line-height: 1.4; }
+
+  /* sheet: one column, label above its text */
+  .back { margin-top: 12px; }
+  .title { gap: 14px; padding: 18px 0 12px; }
+  .title svg { width: 44px; height: 44px; }
+  .title h1 { font-size: clamp(40px, 14.5vw, 64px); }
+  .lede { font-size: 22px; padding: 4px 0 16px; }
+  .prose { padding-bottom: 28px; }
+  .prose p { font-size: 18px; }
+  dl.spec > div { grid-template-columns: 1fr; row-gap: 4px; padding: 13px 0; }
+  dl.spec .n { display: none; }
+  dl.spec dt { font-size: 12px; }
+  dl.spec dd { font-size: 15px; line-height: 1.55; }
+}
