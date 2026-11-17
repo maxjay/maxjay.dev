@@ -25,7 +25,7 @@ export const entries = [
     links: ['https://github.com/maxjay/jvmd'],
   },
   {
-    name: 'dova', planned: true, lang: 'rust', state: 'active', since: 'Aug 2026',
+    name: 'dova', lang: 'rust', state: 'active', since: 'Aug 2026',
     built: 'Rust',
     works: 'Azure Boards, Repos and Pipelines',
     line: 'Azure DevOps, starting from your git repo.',
@@ -34,7 +34,7 @@ export const entries = [
       'dova follows the links from the repo you are in. 1 call instead of 7. Stay coding.',
       'Also an *MCP* server, so agents get the same.',
     ],
-    links: ['https://github.com/maxjay/dova'],
+    links: ['https://dova.maxjay.dev', 'https://github.com/maxjay/dova'],
   },
   {
     name: 'workbench', planned: true, lang: 'rust', state: 'active', since: 'Oct 2026',
